@@ -34,7 +34,12 @@ export async function downloadEpisode(
   const res = await fetch(url, init);
   if (!res.ok) throw new Error(`Téléchargement impossible (HTTP ${res.status}).`);
 
-  const type = res.headers.get('Content-Type') ?? 'audio/mpeg';
+  const type = res.headers.get('Content-Type') ?? '';
+  // Un fichier absent peut être remplacé par la page d'accueil (réécriture SPA) :
+  // on refuse tout ce qui n'est pas de l'audio pour ne jamais mettre en cache du HTML.
+  if (!type.startsWith('audio/')) {
+    throw new Error('Cet épisode n’est pas encore disponible.');
+  }
   const total = Number(res.headers.get('Content-Length')) || 0;
   let blob: Blob;
 

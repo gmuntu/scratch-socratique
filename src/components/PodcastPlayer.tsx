@@ -182,7 +182,7 @@ export function PodcastPlayer({ episodes = EPISODES }: PodcastPlayerProps): JSX.
       resumeOnReconnectRef.current = true;
       setError('Connexion perdue. La lecture reprendra automatiquement au retour du réseau.');
     } else {
-      setError('Impossible de lire cet épisode (fichier introuvable ou format non pris en charge).');
+      setError('Cet épisode n’est pas encore disponible. Reviens bientôt !');
     }
   }
 
