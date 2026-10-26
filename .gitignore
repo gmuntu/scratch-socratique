@@ -1,0 +1,10 @@
+node_modules
+dist
+.env
+public/models/*.task
+public/mediapipe-wasm
+*.tmp
+*.tsbuildinfo
+.env.*
+!.env.example
+!.env.production

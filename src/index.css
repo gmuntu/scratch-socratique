@@ -1,0 +1,29 @@
+*, *::before, *::after { box-sizing: border-box; }
+html, body, #root { margin: 0; height: 100%; }
+body { background: #f6f7fb; }
+@media (prefers-color-scheme: dark) { body { background: #12151c; } }
+
+/* Mobile : onglets, un panneau à la fois. */
+.app-shell { display: flex; flex-direction: column; height: 100dvh; }
+.app-tabs { display: flex; flex: none; border-bottom: 1px solid #e3e6ee; background: #fff; }
+.app-tabs button {
+  flex: 1; min-height: 48px; border: none; background: none; font: inherit; font-weight: 600;
+  color: #6b7385; border-bottom: 3px solid transparent; cursor: pointer;
+}
+.app-tabs button.is-active { color: #4c97ff; border-bottom-color: #4c97ff; }
+.app-pane { display: none; flex: 1; min-height: 0; }
+.app-pane.is-active { display: block; }
+@media (prefers-color-scheme: dark) {
+  .app-tabs { background: #1b1f29; border-color: #2c3344; }
+}
+
+/* Écran large : Socrate fixe à droite, Puzzle / Écouter à gauche. */
+@media (min-width: 960px) {
+  .app-shell { display: grid; grid-template-columns: 3fr 2fr; grid-template-rows: auto 1fr; }
+  .app-tabs { grid-column: 1; grid-row: 1; }
+  .app-tabs .tab-chat { display: none; }
+  .app-tabs button[data-left='true'] { color: #4c97ff; border-bottom-color: #4c97ff; }
+  .app-pane { display: none; grid-column: 1; grid-row: 2; min-height: 0; }
+  .app-pane.is-left { display: block; }
+  .app-pane.pane-chat { display: block; grid-column: 2; grid-row: 1 / span 2; height: 100dvh; border-left: 1px solid #e3e6ee; }
+}
